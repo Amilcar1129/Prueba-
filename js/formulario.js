@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let tasks = [];
 
     taskForm.addEventListener('submit', addTask);
+    taskList.addEventListener('click', updateTask);
 
     function addTask(e) {
         e.preventDefault();
@@ -35,10 +36,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${task.priority}</td>
                 <td>${task.status}</td>
                 <td>
-                    <!-- Acciones aquí -->
+                    <button class="complete" data-id="${task.id}">Marcar como ${task.status === 'Pendiente' ? 'Completa' : 'Pendiente'}</button>
                 </td>
             `;
             taskList.appendChild(row);
         });
     }
+
+    function updateTask(e) {
+        if (e.target.classList.contains('complete')) {
+            const id = e.target.getAttribute('data-id');
+            tasks = tasks.map(task => task.id == id ? { ...task, status: task.status === 'Pendiente' ? 'Completa' : 'Pendiente' } : task);
+            displayTasks();
+        }
+    }
 });
+
