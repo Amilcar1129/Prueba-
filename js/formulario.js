@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     taskForm.addEventListener('submit', addTask);
     taskList.addEventListener('click', updateTask);
+    taskList.addEventListener('click', deleteTask);
 
     function addTask(e) {
         e.preventDefault();
@@ -37,6 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td>${task.status}</td>
                 <td>
                     <button class="complete" data-id="${task.id}">Marcar como ${task.status === 'Pendiente' ? 'Completa' : 'Pendiente'}</button>
+                    <button class="delete" data-id="${task.id}">Eliminar</button>
                 </td>
             `;
             taskList.appendChild(row);
@@ -50,5 +52,12 @@ document.addEventListener('DOMContentLoaded', () => {
             displayTasks();
         }
     }
-});
 
+    function deleteTask(e) {
+        if (e.target.classList.contains('delete')) {
+            const id = e.target.getAttribute('data-id');
+            tasks = tasks.filter(task => task.id != id);
+            displayTasks();
+        }
+    }
+});
