@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestión de Tareas</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Gestión de Tareas</h1>
+        <form id="task-form">
+            <input type="text" id="title" placeholder="Título" required>
+            <input type="text" id="description" placeholder="Descripción" required>
+            <input type="date" id="due-date" required>
+            <select id="priority" required>
+                <option value="Baja">Baja</option>
+                <option value="Media">Media</option>
+                <option value="Alta">Alta</option>
+            </select>
+            <button type="submit">Añadir Tarea</button>
+        </form>
+    </div>
+    <script src="js/formulario.js"></script>
+</body>
+</html>
