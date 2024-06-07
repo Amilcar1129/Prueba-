@@ -1,11 +1,13 @@
 document.addEventListener('DOMContentLoaded', () => {
     const taskForm = document.getElementById('task-form');
     const taskList = document.getElementById('task-list');
+    const search = document.getElementById('search');
     let tasks = [];
 
     taskForm.addEventListener('submit', addTask);
     taskList.addEventListener('click', updateTask);
     taskList.addEventListener('click', deleteTask);
+    search.addEventListener('input', searchTasks);
 
     function addTask(e) {
         e.preventDefault();
@@ -26,9 +28,9 @@ document.addEventListener('DOMContentLoaded', () => {
         taskForm.reset();
     }
 
-    function displayTasks() {
+    function displayTasks(filteredTasks = tasks) {
         taskList.innerHTML = '';
-        tasks.forEach(task => {
+        filteredTasks.forEach(task => {
             const row = document.createElement('tr');
             row.innerHTML = `
                 <td>${task.title}</td>
@@ -59,5 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
             tasks = tasks.filter(task => task.id != id);
             displayTasks();
         }
+    }
+
+    function searchTasks(e) {
+        const query = e.target.value.toLowerCase();
+        const filteredTasks = tasks.filter(task => task.title.toLowerCase().includes(query));
+        displayTasks(filteredTasks);
     }
 });
